@@ -1,3 +1,7 @@
 spring:
   application:
     name: blog-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/blogdb
+    username: bloguser
+    password: blogpass
