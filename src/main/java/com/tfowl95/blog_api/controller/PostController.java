@@ -42,13 +42,11 @@ public class PostController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Post createPost(@Valid @RequestBody PostRequest postRequest) {
-        // Stub
         return postService.create(postRequest);
     }
 
     @PutMapping("/{id}")
     public Post updatePost(@PathVariable Long id, @Valid @RequestBody PostRequest postRequest) {
-        // Stub
         return postService.update(id, postRequest);
     }
 

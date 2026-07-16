@@ -8,46 +8,35 @@ import org.springframework.stereotype.Service;
 
 import com.tfowl95.blog_api.domain.Post;
 import com.tfowl95.blog_api.domain.PostRequest;
+import com.tfowl95.blog_api.repository.PostRepository;
 
 @Service
 public class PostService {
 
+    private final PostRepository postRepository;
+
+    public PostService(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
+
     public List<Post> findAll(String term) {
-        // Stub
-        return List.of(new Post(
-            1L, "Stubbed Post #1", "Content #1", "Tech #1",
-            List.of("Java #1"), Instant.now(), Instant.now()
-        ));
+        return postRepository.findAll(term);
     }
 
     public Optional<Post> findById(Long id) {
-        // Stub
-        return Optional.of(
-            new Post(
-                2L, "Stubbed Post #2", "Content #2", "Tech #2",
-                List.of("Java #2"), Instant.now(), Instant.now()
-            )
-        );
+        return postRepository.findById(id);
     }
 
     public Post create(PostRequest postRequest) {
-        // Stub
-        return new Post(
-            3L, postRequest.title(), postRequest.content(), postRequest.category(),
-            postRequest.tags(), Instant.now(), Instant.now()
-        );
+        return postRepository.save(postRequest);
     }
 
     public Post update(Long id, PostRequest postRequest) {
-        // Stub
-        return new Post(
-            id, postRequest.title(), postRequest.content(), postRequest.category(),
-            postRequest.tags(), Instant.now(), Instant.now()
-        );
+        return postRepository.update(id, postRequest).get();
     }
 
     public void delete(Long id) {
-        // Stub
+        boolean deleteSuccessful = postRepository.delete(id);
     }
 
 }
